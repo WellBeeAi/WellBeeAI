@@ -1,24 +1,22 @@
 "use client";
-import React, { useActionState, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send } from "lucide-react";
-import { create } from "@/api/action";
+import { Send, RotateCcw } from "lucide-react";
 
-const ChatInput = () => {
+const ChatInput = ({ onUserActiveChange }) => {
   const [message, setMessage] = useState("");
   const [disabled, setDisabled] = useState(false);
-  const [responses, setResponses] = useState(); // Specify the type as string[]
   const [userPrompt, setUserPrompt] = useState([]);
   const [systemResponse, setSystemResponse] = useState([]);
 
   useEffect(() => {
-    console.log("use user", userPrompt);
-    console.log("use systemResponse", systemResponse);
-  }, [userPrompt]);
+    if (userPrompt.length > 0 || systemResponse.length > 0) {
+      onUserActiveChange(true, userPrompt, systemResponse);
+    }
+  }, [userPrompt, systemResponse]);
 
   const getChats = async (userPrompt, systemResponse) => {
-    // console.log("msg ", msg);
     const res = await fetch("/api/chat", {
       headers: {
         "Content-Type": "application/json",
@@ -31,31 +29,28 @@ const ChatInput = () => {
     });
     if (res.ok) {
       const data = await res.json();
-      setSystemResponse((prevResponses) => [...prevResponses, data.apiResponse]);
-      setMessage("")
+      setSystemResponse((prevResponses) => [
+        ...prevResponses,
+        data.apiResponse,
+      ]);
+      setMessage("");
       setDisabled(false);
       console.log("systemResponse ", systemResponse);
       console.log("response getChats", data);
     }
   };
   const handleSubmit = async (e) => {
-    console.log("handleSubmit");
     e.preventDefault();
     setDisabled(true);
-    // if (message.trim() !== "") {
-    //   // setResponses((prevResponses) => [...prevResponses, message]);
-    //   setMessage("");
-    // }
     console.log(message);
     setUserPrompt((prevResponses) => [...prevResponses, message]);
-    console.log("userPrompt handleSubmit", userPrompt);
-    console.log("systemResponse handleSubmit", systemResponse);
     await getChats([...userPrompt, message], systemResponse);
-    setTimeout(() => {
-      setDisabled(false);
-    }, 2000);
   };
-
+  const handleReset = () => {
+    setUserPrompt([]);
+    setSystemResponse([]);
+    setMessage("");
+  };
   return (
     <form
       className="flex items-center justify-center w-[500px]"
@@ -69,9 +64,12 @@ const ChatInput = () => {
         className="flex-grow mr-2 rounded-2xl"
         disabled={disabled}
       />
-      <Button size="icon" className="rounded-2xl">
+      <Button className="rounded-2xl">
         <Send className="h-4 w-4" />
         <span className="sr-only">Send</span>
+      </Button>
+      <Button className="rounded-2xl mx-2" onClick={handleReset}>
+        <RotateCcw className="h-5 w-5" />
       </Button>
     </form>
   );

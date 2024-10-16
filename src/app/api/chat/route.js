@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
   const { userPrompt, systemResponse } = await req.json();
 
-  console.log(userPrompt, systemResponse)
+  console.log(userPrompt, systemResponse);
   let token = await getToken();
 
   if (token) {
@@ -42,29 +42,28 @@ const getToken = async () => {
 const getChat = async (token, userPrompt, systemResponse) => {
   const url =
     "https://us-south.ml.cloud.ibm.com/ml/v1/text/generation?version=2023-05-29";
-//   for (let i=0,) {
-//     let str = "\n<|user|>\nHello\n<|assistant|>\nHello! I am Granite Chat, created by IBM. How can I help you today?\n"
-//   }
+  //   for (let i=0,) {
+  //     let str = "\n<|user|>\nHello\n<|assistant|>\nHello! I am Granite Chat, created by IBM. How can I help you today?\n"
+  //   }
   let chatHistory;
   for (let index = 0; index < userPrompt.length; index++) {
     chatHistory += `\n<|user|>\n${userPrompt[index]}\n`;
-    if(index<systemResponse.length)
-        chatHistory += `\n<|assistant|>\n${systemResponse[index]}\n`;
-    else
-        chatHistory += '\n<|assistant|>\n';
-
+    if (index < systemResponse.length)
+      chatHistory += `\n<|assistant|>\n${systemResponse[index]}\n`;
+    else chatHistory += "\n<|assistant|>\n";
   }
-  console.log("chatHistory ",chatHistory);
+  console.log("chatHistory ", chatHistory);
   let bodyContent = JSON.stringify({
-    input: `<|system|>\nYou are Granite Chat, an AI language model developed by IBM. You are a cautious assistant. You carefully follow instructions. You are helpful and harmless and you follow ethical guidelines and promote positive behavior. You always respond to greetings (for example, hi, hello, g'''day, morning, afternoon, evening, night, what'''s up, nice to meet you, sup, etc) with \"Hello! I am Granite Chat, created by IBM. How can I help you today?\". Please do not say anything else and do not start a conversation.${chatHistory}\n`,
+    input: `<|system|>\n Initially you respond to greetings (for example, hi, hello, g'''day, morning, afternoon, evening, night, what'''s up, nice to meet you, sup, etc) with \"Hello! I am WellBee. Your personal mental health advisor. How can I help you today?\". You must show empathy towards the user. Please do not say anything else and do not start a conversation. Strictly give response in three to four lines only.\n${chatHistory}\n`,
     parameters: {
       decoding_method: "greedy",
-      max_new_tokens: 900,
+      max_new_tokens: 300,
       min_new_tokens: 0,
       stop_sequences: [],
-      repetition_penalty: 1.05,
+      repetition_penalty: 1.0,
     },
-    model_id: "ibm/granite-13b-chat-v2",
+    // model_id: "ibm/granite-13b-chat-v2",
+    model_id: "meta-llama/llama-3-2-3b-instruct",
     project_id: "6632adbe-ecc1-43fa-af42-d730a4e4ce89",
   });
 
