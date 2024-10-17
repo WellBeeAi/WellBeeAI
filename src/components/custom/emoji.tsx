@@ -44,6 +44,20 @@ const EmojiSection = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      {/* {emojis.map((emoji, index) => (
+              <Button
+                key={index}
+                variant={"ghost"}
+                size={"icon"}
+                onClick={() => {
+                  setIsExpanded(false);
+                }}
+                className="h-10 w-10"
+                aria-label={`Select ${emoji} emoji`}
+              >
+                {emoji}
+              </Button>
+            ))} */}
     </div>
   );
 };
