@@ -1,7 +1,6 @@
 "use client";
 import ChatInput from "@/components/custom/chatinput";
 import ChatHistory from "@/components/custom/chathistory";
-import EmojiSection from "@/components/custom/emoji";
 import SuggestionInput from "@/components/custom/suggestioninput";
 
 import React, { useState } from "react";

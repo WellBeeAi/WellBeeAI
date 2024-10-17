@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Send, RotateCcw } from "lucide-react";
-import EmojiSection from "./emoji";
 
 const ChatInput = ({ onUserActiveChange }) => {
   const [message, setMessage] = useState("");
@@ -57,7 +56,7 @@ const ChatInput = ({ onUserActiveChange }) => {
       className="flex items-center justify-center w-[500px]"
       onSubmit={handleSubmit}
     >
-      
+
       <Input
         type="text"
         placeholder={!disabled ? "Type your message ..." : "Thinking..."}
