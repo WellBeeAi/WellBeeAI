@@ -28,7 +28,7 @@ const Home = () => {
       {/* <EmojiSection /> */}
       {!userActive && (
         <div className="font-serif text-3xl  p-2 text-white font-bold typewriter">
-          <div>Hello, I'm <span className="text-zinc-800">WellBee</span>. How can I you today?</div>
+          <div>Hello, I'm <span className="text-zinc-800">WellBee</span>. How can I help you today?</div>
         </div>
       )}
 

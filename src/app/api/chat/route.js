@@ -47,14 +47,14 @@ const getChat = async (token, userPrompt, systemResponse) => {
   //   }
   let chatHistory;
   for (let index = 0; index < userPrompt.length; index++) {
-    chatHistory += `\n<|user|>\n${userPrompt[index]}\n`;
+    chatHistory += `<|eot_id|><|start_header_id|>user<|end_header_id|>${userPrompt[index]}`;
     if (index < systemResponse.length)
-      chatHistory += `\n<|assistant|>\n${systemResponse[index]}\n`;
-    else chatHistory += "\n<|assistant|>\n";
+      chatHistory += `<|eot_id|><|start_header_id|>assistant<|end_header_id|>${systemResponse[index]}`;
+    else chatHistory += "<|eot_id|><|start_header_id|>assistant<|end_header_id|>";
   }
   console.log("chatHistory ", chatHistory);
   let bodyContent = JSON.stringify({
-    input: `<|system|>\n Initially you respond to greetings (for example, hi, hello, g'''day, morning, afternoon, evening, night, what'''s up, nice to meet you, sup, etc) with \"Hello! I am WellBee. Your personal mental health advisor. How can I help you today?\". You must show empathy towards the user. Please do not say anything else and do not start a conversation. Strictly give response in three to four lines only.\n${chatHistory}\n`,
+    input: `<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n Initially you respond to greetings (for example, hi, hello, g'''day, morning, afternoon, evening, night, what'''s up, nice to meet you, sup, etc) with \"Hello! I am WellBee. Your personal mental health advisor. How can I help you today?\". You must show empathy towards the user. Please do not say anything else and do not start a conversation. Strictly give response in three to four lines only.${chatHistory}`,
     parameters: {
       decoding_method: "greedy",
       max_new_tokens: 300,
@@ -62,8 +62,8 @@ const getChat = async (token, userPrompt, systemResponse) => {
       stop_sequences: [],
       repetition_penalty: 1.0,
     },
-    model_id: "ibm/granite-13b-chat-v2",
-    // model_id: "meta-llama/llama-3-2-3b-instruct",
+    // model_id: "ibm/granite-13b-chat-v2",
+    model_id: "meta-llama/llama-3-1-8b-instruct",
     project_id: "2dd7a246-39ba-4c08-9af2-de19199c5778",
   });
 
