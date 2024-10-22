@@ -64,7 +64,7 @@ const getChat = async (token, userPrompt, systemResponse) => {
     },
     // model_id: "ibm/granite-13b-chat-v2",
     model_id: "meta-llama/llama-3-2-3b-instruct",
-    project_id: "6632adbe-ecc1-43fa-af42-d730a4e4ce89",
+    project_id: "2dd7a246-39ba-4c08-9af2-de19199c5778",
   });
 
   try {
