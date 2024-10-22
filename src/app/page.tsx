@@ -1,9 +1,15 @@
-import React from 'react'
+"use client";
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-const page = () => {
-  return (
-    <div>Hello World!</div>
-  )
-}
+const RedirectComponent = () => {
+  const router = useRouter();
 
-export default page
+  useEffect(() => {
+    router.push('/home');
+  }, [router]);
+
+  return null; // You can also return a loading spinner or similar if needed
+};
+
+export default RedirectComponent;
