@@ -41,7 +41,7 @@ const getToken = async () => {
 
 const getChat = async (token, userPrompt, systemResponse) => {
   const url =
-    "https://us-south.ml.cloud.ibm.com/ml/v1/text/generation?version=2023-05-29";
+    "https://eu-de.ml.cloud.ibm.com/ml/v1/text/generation?version=2023-05-29";
   //   for (let i=0,) {
   //     let str = "\n<|user|>\nHello\n<|assistant|>\nHello! I am Granite Chat, created by IBM. How can I help you today?\n"
   //   }
@@ -62,8 +62,8 @@ const getChat = async (token, userPrompt, systemResponse) => {
       stop_sequences: [],
       repetition_penalty: 1.0,
     },
-    // model_id: "ibm/granite-13b-chat-v2",
-    model_id: "meta-llama/llama-3-2-3b-instruct",
+    model_id: "ibm/granite-13b-chat-v2",
+    // model_id: "meta-llama/llama-3-2-3b-instruct",
     project_id: "2dd7a246-39ba-4c08-9af2-de19199c5778",
   });
 

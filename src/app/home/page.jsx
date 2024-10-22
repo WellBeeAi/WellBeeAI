@@ -4,6 +4,7 @@ import ChatHistory from "@/components/custom/chathistory";
 import SuggestionInput from "@/components/custom/suggestioninput";
 
 import React, { useState } from "react";
+import "./home.css";
 
 var middle =
   "css-selector flex items-center justify-center h-screen w-screen flex-col gap-2 my-4";
@@ -26,8 +27,8 @@ const Home = () => {
     <div className={!userActive ? middle : bottom}>
       {/* <EmojiSection /> */}
       {!userActive && (
-        <div className="font-serif text-3xl  p-2 text-white font-bold">
-          What can i help with ?
+        <div className="font-serif text-3xl  p-2 text-white font-bold typewriter">
+          <div>Hello, I'm <span className="text-zinc-800">WellBee</span>. How can I you today?</div>
         </div>
       )}
 
