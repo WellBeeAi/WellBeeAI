@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Image from "next/image";
+import BeeLogo from "./bee.png";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,6 +30,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased css-selector`}
       >
+        <div className="absolute top-4 left-5">
+          <Image height={60} width={60} alt="wellbee" src={BeeLogo}/>
+        </div>
         {children}
       </body>
     </html>
