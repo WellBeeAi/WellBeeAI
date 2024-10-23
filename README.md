@@ -132,7 +132,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 ### Authors  
 
 <a href="https://github.com/WellBee/WellBee/graphs/contributors">
-  <img src="https://contributors-img.web.app/image?repo=WellBee/WellBee" />
+  <img src="https://contributors-img.web.app/image?repo=WellBeeAi/WellBeeAI" />
 </a>  
 
 ---
