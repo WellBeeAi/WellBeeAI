@@ -5,6 +5,8 @@ import SuggestionInput from "@/components/custom/suggestioninput";
 
 import React, { useState } from "react";
 import "./home.css";
+import Image from "next/image";
+import BeeLogo from "../bee.png";
 
 var middle =
   "css-selector flex items-center justify-center h-screen w-screen flex-col gap-2 my-4";
@@ -22,13 +24,22 @@ const Home = () => {
     if (systemResponse) setSystemResponse(systemResponse);
   };
 
-
   return (
     <div className={!userActive ? middle : bottom}>
       {/* <EmojiSection /> */}
       {!userActive && (
         <div className="font-serif text-3xl  p-2 text-white font-bold typewriter">
-          <div>Hello, I'm <span className="text-zinc-800">WellBee</span>. How can I help you today?</div>
+          <div className="flex items-baseline">
+            Hello, I'm
+            <span className="text-zinc-800 mx-2">
+              <span className="relative left-3">
+                <Image height={30} width={30} alt="bee" src={BeeLogo} />
+              </span>
+              <span>WellBee</span>
+              {/* WellBee */}
+            </span>
+            . How can I help you today?
+          </div>
         </div>
       )}
 

@@ -3,7 +3,7 @@
     color: #fff;
     font-family:'Times New Roman', Times, serif;
     overflow: hidden; /* Ensures the content is not revealed until the animation */
-    border-right: .15em solid orange; /* The typwriter cursor */
+    border-right: .1em solid orange; /* The typwriter cursor */
     white-space: nowrap; /* Keeps the content on a single line */
     margin: 0 auto; /* Gives that scrolling effect as the typing happens */
     letter-spacing: .15em; /* Adjust as needed */
@@ -23,4 +23,15 @@
   @keyframes blink-caret {
     from, to { border-color: transparent }
     50% { border-color: orange }
+  }
+
+  .wellbee{
+    content: "";
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-image: url("../bee.png"); /* Replace with your image URL */
+    background-size: cover;
+    position: relative;
+    top: 20px;
   }
